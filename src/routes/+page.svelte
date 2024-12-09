@@ -10,23 +10,18 @@
 
   let products: Product[] = [];
 
-  // Fetch the products from the server
-  const fetchProducts = async () => {
+  // Fetch the products from the server after the component mounts
+  onMount(async () => {
     try {
-      const response = await fetch('/api/products');  // Your API endpoint to fetch products
+      const response = await fetch('/api/products'); // Your API endpoint to fetch products
       if (response.ok) {
-        products = await response.json();  // Update the products array
+        products = await response.json(); // Update the products array
       } else {
         console.error('Failed to fetch products');
       }
     } catch (error) {
       console.error('Error fetching products:', error);
     }
-  };
-
-  // Fetch products on component mount (only on the client)
-  onMount(() => {
-    fetchProducts();
   });
 
   const addToCart = (product: Product) => {
@@ -39,7 +34,6 @@
 </script>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
 <div class="app-container">
   <!-- Navbar -->
   <nav class="navbar">

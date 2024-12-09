@@ -1,12 +1,12 @@
 [
   {
-    "name": "Banga",
-    "price": 1000,
-    "imagePath": "C:\\Users\\arnold\\Desktop\\svelte-project\\e-commerce\\uploads\\icyli.png"
+    "name": "Banga 15kg",
+    "price": 70,
+    "imagePath": "C:\\Users\\arnold\\Desktop\\svelte-project\\e-commerce\\uploads\\Banga15kg.jpg"
   },
   {
-    "name": "Banga",
-    "price": 1000,
-    "imagePath": "C:\\Users\\arnold\\Desktop\\svelte-project\\e-commerce\\uploads\\Cardinality_ERD.png"
+    "name": "Banga ",
+    "price": 100,
+    "imagePath": "C:\\Users\\arnold\\Desktop\\svelte-project\\e-commerce\\uploads\\Banga15kg.jpg"
   }
 ]
