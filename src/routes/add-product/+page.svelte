@@ -1,28 +1,50 @@
 <script lang="ts">
-    let name = '';
-    let price: number | null = null;
-    let imageFile: File | null = null;
-    let imageUrl = '';
-    let cartCount = 3; // Example item count in the cart
-  
-    const submitProduct = () => {
-      if (name && price && imageFile) {
-        alert(`Product "${name}" added!`);
-        console.log(imageFile.name);
+  let name = '';
+  let price: number | null = null;
+  let imageFile: File | null = null;
+  let imageUrl = '';
+  let cartCount = 3; // Example item count in the cart
+
+  const submitProduct = async () => {
+  try {
+    if (name && price && imageFile) {
+      // Send product data to the backend
+      const formData = new FormData();
+      formData.append('name', name);
+      formData.append('price', price.toString());
+      formData.append('image', imageFile);
+
+      const response = await fetch('/api/products', {
+        method: 'POST',
+        body: formData,
+      });
+
+      if (response.ok) {
+        alert(`Product "${name}" added successfully!`);
       } else {
-        alert("Please fill in all fields.");
+        alert('Failed to add product.');
       }
-    };
-  
-    const handleImageUpload = (event: Event) => {
-      const fileInput = event.target as HTMLInputElement;
-      if (fileInput?.files?.[0]) {
-        imageFile = fileInput.files[0];
-        imageUrl = URL.createObjectURL(imageFile); // Create a temporary URL to show the image preview
-      }
-    };
-  </script>
-  
+    } else {
+      alert("Please fill in all fields.");
+    }
+  } catch (error: unknown) {
+    // Handle the error by checking its type
+    if (error instanceof Error) {
+      alert(`An error occurred: ${error.message}`);
+    } else {
+      alert('An unknown error occurred.');
+    }
+  }
+};
+
+  const handleImageUpload = (event: Event) => {
+    const fileInput = event.target as HTMLInputElement;
+    if (fileInput?.files?.[0]) {
+      imageFile = fileInput.files[0];
+      imageUrl = URL.createObjectURL(imageFile); // Create a temporary URL to show the image preview
+    }
+  };
+</script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <div class="container">
     <!-- Navbar -->
