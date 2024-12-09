@@ -1,5 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte';
+  import { writable } from 'svelte/store'; // Import writable from svelte.store
 
   interface Product {
     id: number;
@@ -7,6 +8,9 @@
     price: number;
     image: string;
   }
+
+  // Create a writable store for the cart
+  export const cart = writable<Product[]>([]);
 
   let products: Product[] = [];
 
@@ -25,6 +29,8 @@
   });
 
   const addToCart = (product: Product) => {
+    // Add the product to the cart store
+    cart.update(currentCart => [...currentCart, product]);
     alert(`${product.name} added to cart!`);
   };
 

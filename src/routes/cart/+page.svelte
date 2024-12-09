@@ -40,7 +40,7 @@
     padding: 2rem;
     max-width: 900px;
     margin: 0 auto;
-    background-color: #fdf6e3;
+    background-color: #fdf6e3; /* Warm beige background */
     border-radius: 0.375rem;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   }
@@ -59,7 +59,7 @@
   }
 
   .home-button-style {
-    background-color: #10b981; /* Green */
+    background-color: #ea580c; /* Orange */
     color: white;
     padding: 0.5rem 1rem;
     border: none;
@@ -70,7 +70,7 @@
   }
 
   .home-button-style:hover {
-    background-color: #16a34a; /* Darker green */
+    background-color: #f97316; /* Light orange */
   }
 
   /* Message when cart is empty */
@@ -109,7 +109,7 @@
   }
 
   .remove-button {
-    background-color: #ea580c;
+    background-color: #f44336; /* Red */
     color: white;
     padding: 0.5rem 1rem;
     border: none;
@@ -119,7 +119,7 @@
   }
 
   .remove-button:hover {
-    background-color: #f97316;
+    background-color: #d32f2f; /* Darker red */
   }
 
   /* Total amount and checkout button */
@@ -130,7 +130,7 @@
   }
 
   .checkout-button {
-    background-color: #f59e0b;
+    background-color: #f59e0b; /* Amber */
     color: white;
     padding: 1rem 2rem;
     border: none;
@@ -143,6 +143,6 @@
   }
 
   .checkout-button:hover {
-    background-color: #fbbf24;
+    background-color: #fbbf24; /* Light amber */
   }
 </style>
