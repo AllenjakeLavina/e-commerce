@@ -31,9 +31,32 @@
   const viewCart = () => {
     alert("Cart is empty. Start shopping!");
   };
+
+  // Function to delete a product
+  const deleteProduct = async (name: string) => {
+    try {
+      const response = await fetch('/api/products', {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ name }),
+      });
+
+      if (response.ok) {
+        // Remove the deleted product from the local array
+        products = products.filter(product => product.name !== name);
+        alert(`${name} deleted successfully!`);
+      } else {
+        console.error('Failed to delete product');
+      }
+    } catch (error) {
+      console.error('Error deleting product:', error);
+    }
+  };
 </script>
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet"/>
 <div class="app-container">
   <!-- Navbar -->
   <nav class="navbar">
@@ -41,7 +64,7 @@
       <h1 class="navbar-title">Pottery Haven</h1>
       <div class="navbar-links">
         <a href="/cart" class="nav-link" aria-label="Go to Cart">
-          <i class="fas fa-shopping-cart"></i>
+          <i class="fa-solid fa-cart-shopping"></i>
         </a>
         <a href="/add-product" class="nav-link" aria-label="Add a new product">
           Add Product
@@ -59,13 +82,22 @@
           <img src={product.image} alt={product.name} class="product-image" />
           <h3 class="product-name">{product.name}</h3>
           <p class="product-price">${product.price.toFixed(2)}</p>
-          <button
-            on:click={() => addToCart(product)}
-            class="add-to-cart-button"
-            aria-label={`Add ${product.name} to Cart`}
-          >
-            <i class="fas fa-shopping-cart"></i> Add to Cart
-          </button>
+          <div class="button-container">
+            <button
+              on:click={() => addToCart(product)}
+              class="add-to-cart-button"
+              aria-label={`Add ${product.name} to Cart`}
+            >
+              <i class="fa-solid fa-cart-shopping"></i> Add to Cart
+            </button>
+            <button
+              on:click={() => deleteProduct(product.name)}
+              class="delete-button"
+              aria-label={`Delete ${product.name}`}
+            >
+              <i class="fa-solid fa-trash"></i> Delete
+            </button>
+          </div>
         </div>
       {/each}
     </div>
@@ -189,6 +221,13 @@
     margin-bottom: 1rem;
   }
 
+  /* Button container to arrange buttons side by side */
+  .button-container {
+    display: flex;
+    gap: 0.75rem; /* Space between the buttons */
+    margin-top: 1rem;
+  }
+
   .add-to-cart-button {
     background-color: #ea580c; /* Orange */
     color: white;
@@ -202,5 +241,20 @@
 
   .add-to-cart-button:hover {
     background-color: #f97316; /* Light orange */
+  }
+
+  .delete-button {
+    background-color: #f44336; /* Red */
+    color: white;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 0.375rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+
+  .delete-button:hover {
+    background-color: #d32f2f; /* Darker red */
   }
 </style>

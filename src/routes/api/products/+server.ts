@@ -71,3 +71,46 @@ export const GET: RequestHandler = async () => {
     );
   }
 };
+
+// DELETE handler for removing a product
+export const DELETE: RequestHandler = async ({ request }) => {
+  try {
+    const { name } = await request.json(); // Get the product name from the request body
+
+    if (!name) {
+      return new Response(
+        JSON.stringify({ error: 'Product name is required.' }),
+        { status: 400 }
+      );
+    }
+
+    const productsPath = path.join(process.cwd(), 'products.json');
+    const products: Product[] = fs.existsSync(productsPath)
+      ? JSON.parse(fs.readFileSync(productsPath, 'utf-8'))
+      : [];
+
+    // Filter out the product to be deleted
+    const updatedProducts = products.filter(product => product.name !== name);
+
+    // If no products were removed, return an error
+    if (updatedProducts.length === products.length) {
+      return new Response(
+        JSON.stringify({ error: 'Product not found.' }),
+        { status: 404 }
+      );
+    }
+
+    fs.writeFileSync(productsPath, JSON.stringify(updatedProducts, null, 2));
+
+    return new Response(
+      JSON.stringify({ message: 'Product deleted successfully!' }),
+      { status: 200 }
+    );
+  } catch (error) {
+    console.error('Error in DELETE handler:', error);
+    return new Response(
+      JSON.stringify({ error: 'An error occurred while deleting the product.' }),
+      { status: 500 }
+    );
+  }
+};

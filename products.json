@@ -1,12 +1,7 @@
 [
   {
     "name": "Banga 15kg",
-    "price": 70,
-    "imagePath": "C:\\Users\\arnold\\Desktop\\svelte-project\\e-commerce\\uploads\\Banga15kg.jpg"
-  },
-  {
-    "name": "Banga ",
-    "price": 100,
+    "price": 80,
     "imagePath": "C:\\Users\\arnold\\Desktop\\svelte-project\\e-commerce\\uploads\\Banga15kg.jpg"
   }
 ]
